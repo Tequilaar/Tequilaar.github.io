@@ -208,3 +208,9 @@ li a:hover {
     font-weight: 700;
     font-size: 20px;
 }
+
+.working {
+    text-align: center;
+    font-weight: 800;
+    font-size: 56px;
+}
