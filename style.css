@@ -109,14 +109,32 @@ li a:hover {
     /* height: 280px; */
 }
 
+#photos .cover {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* height: 180px; */
+    border-radius: 8px;
+}
+
+#photos {
+    text-align: right;
+    width: 100%;
+    background-image: url("./res/photos.jpg");
+    /* background-size: 100%; */
+    background-size: cover;
+    background-position: 0 55%;
+    background-repeat: repeat-y;
+    border-radius: 8px;
+    /* height: 180px; */
+}
+
 #videos .cover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(10, 10, 20, 0.1);
     /* height: 180px; */
     border-radius: 8px;
 }
 
 #videos {
-    text-align: right;
+    text-align: left;
     width: 100%;
     background-image: url("./res/cockpit.jpg");
     /* background-size: 100%; */
@@ -128,13 +146,13 @@ li a:hover {
 }
 
 #learning-materials .cover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.2);
     /* height: 160px; */
     border-radius: 8px;
 }
 
 #learning-materials {
-    text-align: left;
+    text-align: right;
     width: 100%;
     background-image: url("./res/nju.jpg");
     /* background-size: 100%; */
