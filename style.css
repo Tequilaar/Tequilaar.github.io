@@ -37,6 +37,10 @@ li a:hover {
     margin-bottom: 40px;
 }
 
+#apps-content {
+    margin: 16px;
+}
+
 .content .ques {
     font-weight: 600;
     font-size: 24px;
@@ -277,4 +281,8 @@ li a:hover {
 
 .apps-block #content .details .detail-link :hover {
     color:#bbbbbb2f;
+}
+
+.space {
+    margin: 4px;
 }
