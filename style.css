@@ -33,12 +33,7 @@ li a:hover {
 }
 
 .content {
-    margin: 40px;
     margin-bottom: 40px;
-}
-
-#apps-content {
-    margin: 16px;
 }
 
 .content .ques {
@@ -52,12 +47,12 @@ li a:hover {
 }
 
 .ans, #divcontent {
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
 }
 
 .about-myself {
     font-size: 15px;
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
 }
 
 .email {
@@ -253,8 +248,6 @@ li a:hover {
     background: linear-gradient(#5a5a5a, #131313);
     border-radius: 10px;
     padding: 10px;
-    display: flex;
-    align-items: center;
 }
 
 .apps-block #content img {
@@ -264,7 +257,6 @@ li a:hover {
 
 .apps-block #content .details {
     padding: 16px;
-    font-size: 14px;
 }
 
 .apps-block #content .details .detail-link {
@@ -285,4 +277,60 @@ li a:hover {
 
 .space {
     margin: 4px;
+}
+
+@media screen and (max-width:320px) {
+    html {
+        font-size: 12px;
+    }
+
+    .content {
+        margin: 8px;
+    }
+
+    .preview {
+        width: 80%;
+        height: auto;
+    }
+}
+
+@media screen and (min-width:321px) and (max-width:750px) {
+    html {
+        font-size: 14px;
+    }
+
+    .content {
+        margin: 24px;
+    }
+
+    .preview {
+        width: 40%;
+        height: auto;
+    }
+    
+    .apps-block #content {
+        display: flex;
+        align-items: center;
+    }
+
+}
+
+@media screen and (min-width:751px) {
+    html {
+        font-size: 16px;
+    }
+
+    .content {
+        margin: 40px;
+    }
+    
+    .preview {
+        width: 60%;
+        height: auto;
+    }
+
+    .apps-block #content {
+        display: flex;
+        align-items: center;
+    }
 }
