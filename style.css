@@ -378,7 +378,7 @@ li a:hover {
 
 #diary-trailer p {
     text-align: center;
-    color: #ffffffcf;
+    color: #fd6565a3;
     font-family: SF Mono;
     font-size: 20px;
 }
@@ -388,7 +388,7 @@ li a:hover {
 }
 
 #diary-trailer span {
-    color: #0000006f;
+    /* color: #0000006f; */
 }
 
 .music-title {
