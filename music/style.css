@@ -40,7 +40,7 @@
 
 #diary-trailer p {
     text-align: center;
-    color: #ffffffcf;
+    color: #f05d5dcf;
     font-family: SF Mono;
     font-size: 20px;
 }
@@ -50,7 +50,7 @@
 }
 
 #diary-trailer span {
-    color: #0000006f;
+    /* color: #0000006f; */
 }
 
 .music-title {
