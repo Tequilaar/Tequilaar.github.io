@@ -3,7 +3,7 @@
     src: url("./res/fonts/SFMonoRegular.otf");
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:430px) {
     html {
         font-size: 12px;
     }
@@ -27,7 +27,7 @@
     }
 }
 
-@media screen and (min-width:321px) and (max-width:750px) {
+@media screen and (min-width:431px) and (max-width:750px) {
     html {
         font-size: 14px;
     }
