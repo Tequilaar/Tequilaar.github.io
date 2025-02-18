@@ -84,14 +84,14 @@
 }
 
 .banner {
-    /* background-color: #eb7a77; */
-    background: linear-gradient(#eb7a77, #ef5e59);
-    padding: 20px;
-    margin: 0px;
-    align-items: center;
-    text-align: center;
-    height: 100px;
+    background: linear-gradient(135deg, #eb7a77, #ef5e59);
     border-radius: 16px;
+    padding: 24px;
+    margin: 12px;
+    height: auto;
+    text-align: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .banner img {
@@ -125,7 +125,10 @@ li a:hover {
 
 .about-myself {
     font-size: 15px;
-    /* font-family: 'Times New Roman', Times, serif; */
+    background: rgba(255,255,255,0.05);
+    padding: 20px 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .email {
@@ -134,38 +137,42 @@ li a:hover {
 }
 
 #greeting {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
     text-align: center;
+    margin: 32px 0;
+    color: #333;
 }
 
 .block {
-    margin: 5px;
+    margin: 16px 5px;
     z-index: -1;
-    /* filter: blur(2px); */
+    transition: transform 0.3s ease;
 }
 
-#music .cover {
-    background-color: rgba(0, 0, 0, 0.4);
-    /* height: 230px; */
+.block:hover {
+    transform: translateY(-5px);
+}
+
+.cover {
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
+    backdrop-filter: blur(4px);
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.cover:hover {
+    background-color: rgba(0, 0, 0, 0.5); 
 }
 
 #music {
     text-align: right;
     width: 100%;
     background-image: url("./res/music.jpg");
-    /* background-size: 125%; */
     background-size: cover;
     background-position: top;
     background-repeat: repeat-y;
-    border-radius: 8px;
-    /* height: 230px; */
-}
-
-#apps .cover {
-    background-color: rgba(0, 0, 0, 0.4);
-    /* height: 280px; */
     border-radius: 8px;
 }
 
@@ -173,17 +180,9 @@ li a:hover {
     text-align: left;
     width: 100%;
     background-image: url("./res/codes.png");
-    /* background-size: 100%; */
     background-size: cover;
     background-position: top;
     background-repeat: repeat-y;
-    border-radius: 8px;
-    /* height: 280px; */
-}
-
-#photos .cover {
-    background-color: rgba(0, 0, 0, 0.4);
-    /* height: 180px; */
     border-radius: 8px;
 }
 
@@ -191,17 +190,9 @@ li a:hover {
     text-align: right;
     width: 100%;
     background-image: url("./res/photos.jpg");
-    /* background-size: 100%; */
     background-size: cover;
     background-position: 0 55%;
     background-repeat: repeat-y;
-    border-radius: 8px;
-    /* height: 180px; */
-}
-
-#videos .cover {
-    background-color: rgba(10, 10, 20, 0.1);
-    /* height: 180px; */
     border-radius: 8px;
 }
 
@@ -209,17 +200,9 @@ li a:hover {
     text-align: left;
     width: 100%;
     background-image: url("./res/cockpit.jpg");
-    /* background-size: 100%; */
     background-size: cover;
     background-position: top;
     background-repeat: repeat-y;
-    border-radius: 8px;
-    /* height: 180px; */
-}
-
-#learning-materials .cover {
-    background-color: rgba(0, 0, 0, 0.2);
-    /* height: 160px; */
     border-radius: 8px;
 }
 
@@ -227,12 +210,10 @@ li a:hover {
     text-align: right;
     width: 100%;
     background-image: url("./res/nju.jpg");
-    /* background-size: 100%; */
     background-size: cover;
     background-position: 100% 80%;
     background-repeat: repeat-y;
     border-radius: 8px;
-    /* height: 160px; */
 }
 
 #divcontent {
@@ -276,22 +257,25 @@ li a:hover {
 
 .bottom {
     height: 154px;
-    background-color: #eeeeee;
+    background-color: #f8f8f8;
     text-align: center;
     margin: -10px;
-    padding: 5px;
+    padding: 32px 5px;
+    border-top: 1px solid #eee;
 }
 
 .bottom a {
     color: black;
     margin: 14px;
     text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
 
 .bottom a:hover {
-    background-color: #bbb;
-    background-size: 110%;
-    border-radius: 5px;
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
 }
 
 #more_about {
@@ -334,9 +318,6 @@ li a:hover {
 
 .apps-block #content .details .detail-link {
     color: white;
-    /* position: absolute;
-    left: 60%;
-    top: 320px; */
     text-decoration: none;
 }
 
