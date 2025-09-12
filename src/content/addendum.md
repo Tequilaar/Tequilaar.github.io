@@ -4,4 +4,5 @@ avatarImage:
   alt: 'My avatar'
 ---
 
-Thanks for reading my blog post! Feel free to check out my other posts or contact me via the social links in the footer.
+感谢你读到这里！👀
+想看更多的话就去翻翻我的其他文章吧～ ✨
