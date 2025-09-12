@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://aritxonly.github.io/sitemap-index.xml
