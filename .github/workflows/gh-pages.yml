@@ -20,6 +20,9 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+      - run: |
+          ls -la dist | sed -n '1,200p'
+          test -f dist/CNAME || (echo "CNAME not found in dist!" && exit 1)
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
