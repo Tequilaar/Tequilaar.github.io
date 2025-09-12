@@ -1,0 +1,41 @@
+---
+import type { NavLink } from '~/types'
+
+interface Props { link: NavLink }
+const { link } = Astro.props
+
+// 当前路由激活：/posts 子路由也高亮
+const isActive =
+  Astro.url.pathname === link.url ||
+  (link.url !== '/' && Astro.url.pathname.startsWith(link.url))
+---
+
+<a
+  href={link.url}
+  rel={link.external ? 'noopener noreferrer' : undefined}
+  target={link.external ? '_blank' : undefined}
+  aria-current={isActive ? 'page' : undefined}
+  data-active={isActive ? '' : undefined}
+  class="nav-link inline-flex items-center px-2.5 py-1.5 rounded-xl no-underline
+         text-accent/90 hover:text-accent hover:bg-accent/10
+         data-[active]:text-accent data-[active]:bg-accent/15
+         transition focus-visible:outline-2 focus-visible:outline-offset-2
+         focus-visible:outline-[color-mix(in_srgb,var(--theme-accent),40%,transparent)]"
+>
+  {link.name}
+</a>
+
+<style>
+  /* 如果你想要轻微的下划线动画，把下面两段取消注释；默认无下划线 */
+  /* .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: .6rem; right: .6rem; bottom: .25rem;
+    height: 2px; background: var(--theme-accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .18s ease;
+    opacity: .9;
+  }
+  .nav-link:hover::after { transform: scaleX(1); } */
+</style>
