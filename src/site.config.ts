@@ -172,6 +172,10 @@ const config: SiteConfig = {
     // linkedin: 'https://github.com/stelcodes/multiterm-astro',
     // bluesky: 'https://github.com/stelcodes/multiterm-astro',
     // twitter: 'https://github.com/stelcodes/multiterm-astro',
+    bilibili: 'https://space.bilibili.com/283375530',
+    netease: 'https://music.163.com/#/artist?id=34279798',
+    soundcloud: 'https://soundcloud.com/aritx-zhou',
+    coolapk: 'http://www.coolapk.com/u/1957498',
     rss: true, // Set to true to include an RSS feed link in the footer
   },
   // Configuration for Giscus comments.

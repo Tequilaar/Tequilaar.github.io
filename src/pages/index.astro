@@ -9,6 +9,8 @@ import HomeBanner from '~/components/HomeBanner.astro'
 import siteConfig from '~/site.config'
 import TagsSection from '~/components/TagsSection.astro'
 import SeriesSection from '~/components/SeriesSection.astro'
+import ChevronsRightIcon from '~/icons/chevrons-right.svg'
+import apps from '~/data/apps.json'
 
 const home = await getCollection('home')
 let HomeContent
@@ -34,17 +36,55 @@ const postsHaveSeries = sortedPosts.some((post) => post.data.series)
     HomeContent && (
       <HomeBanner avatarImage={homeAvatarImage} githubCalendar={homeGithubCalendar}>
         <Fragment slot="title">
-          <h1>Yo! 欢迎来到我的个人小站 👋</h1>   <!-- 将被 prose 当作 h1 样式处理 -->
+          <h1>Yo! 欢迎来到我的个人小站 👋</h1>
         </Fragment>
 
         <HomeContent />
       </HomeBanner>
     )
   }
+
+<section>
+  <BlockHeader>我的项目</BlockHeader>
+
+  <div class="grid gap-4 sm:grid-cols-2 mt-4">
+    {apps.slice(0, 2).map((app) => (
+      <a
+        href={app.url}
+        target="_blank"
+        rel="noopener"
+        class="group flex h-full flex-col justify-between rounded-2xl border border-accent p-4 hover:bg-accent/5 transition"
+        aria-label={`查看 ${app.name}`}
+      >
+        <div>
+          {app.images && app.images.length > 0 && (
+            <img
+              src={app.images[0]}
+              alt={app.name}
+              loading="lazy"
+              class="mb-3 aspect-video w-full rounded-lg object-cover"
+            />
+          )}
+
+          <h3 class="text-lg font-semibold">{app.name}</h3>
+          <p class="mt-1 text-[var(--ec-foreground-muted)]">
+            {app.short}
+          </p>
+        </div>
+
+        <div class="mt-3 flex items-center gap-1 text-accent opacity-90 group-hover:opacity-100">
+          <span>了解更多</span>
+          <ChevronsRightIcon class="inline size-4" />
+        </div>
+      </a>
+    ))}
+    </div>
+  </section>
+
   {
     postsHaveSeries && (
       <section>
-        <BlockHeader>Series</BlockHeader>
+        <BlockHeader>合集</BlockHeader>
         <SeriesSection posts={sortedPosts} />
       </section>
     )
@@ -52,7 +92,7 @@ const postsHaveSeries = sortedPosts.some((post) => post.data.series)
   {
     postsHaveTags && (
       <section>
-        <BlockHeader>Tags</BlockHeader>
+        <BlockHeader>标签</BlockHeader>
         <TagsSection posts={sortedPosts} />
       </section>
     )
@@ -60,14 +100,14 @@ const postsHaveSeries = sortedPosts.some((post) => post.data.series)
   {
     sortedPosts.length > 0 && (
       <section>
-        <BlockHeader>Latest Posts</BlockHeader>
+        <BlockHeader>最近博客</BlockHeader>
         {sortedPosts
           .reverse()
           .slice(0, Math.floor(siteConfig.pageSize / 2))
           .map((post) => (
             <PostPreview post={post} />
           ))}
-        <Pagination nextLink="/posts" nextText="Archive" />
+        <Pagination nextLink="/posts" nextText="博客列表" />
       </section>
     )
   }

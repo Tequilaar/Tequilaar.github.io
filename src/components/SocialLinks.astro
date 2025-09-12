@@ -7,6 +7,10 @@ import IconLinkedin from '~/icons/linkedin.svg'
 import IconBluesky from '~/icons/bluesky.svg'
 import IconEmail from '~/icons/email.svg'
 import IconRss from '~/icons/rss.svg'
+import IconBilibili from '~/icons/bilibili.svg'
+import IconNetease from '~/icons/netease.svg'
+import IconSoundcloud from '~/icons/soundcloud.svg'
+import IconCoolapk from '~/icons/coolapk.svg'
 
 interface Props {
   socialLinks: SocialLinks
@@ -78,6 +82,58 @@ const { socialLinks } = Astro.props
       >
         <span class="sr-only">Bluesky</span>
         <IconBluesky class="size-7" />
+      </a>
+    )
+  }
+  {
+    socialLinks.bilibili && (
+      <a
+        href={socialLinks.bilibili}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+      >
+        <span class="sr-only">Bilibili</span>
+        <IconBilibili class="size-7" />
+      </a>
+    )
+  }
+  {
+    socialLinks.netease && (
+      <a
+        href={socialLinks.netease}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+      >
+        <span class="sr-only">Netease Cloud Music</span>
+        <IconNetease class="size-7" />
+      </a>
+    )
+  }
+  {
+    socialLinks.soundcloud && (
+      <a
+        href={socialLinks.soundcloud}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+      >
+        <span class="sr-only">SoundCloud</span>
+        <IconSoundcloud class="size-7" />
+      </a>
+    )
+  }
+  {
+    socialLinks.coolapk && (
+      <a
+        href={socialLinks.coolapk}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+      >
+        <span class="sr-only">Coolapk</span>
+        <IconCoolapk class="size-7" />
       </a>
     )
   }
