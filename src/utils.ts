@@ -329,3 +329,19 @@ export function getPostSequenceContext(
   const next = index < posts.length - 1 ? posts[index + 1] : undefined
   return { index, prev, next }
 }
+
+import Parser from 'rss-parser'
+const parser = new Parser()
+
+export async function fetchLatest(feedUrl: string, limit = 3) {
+  try {
+    const feed = await parser.parseURL(feedUrl)
+    return (feed.items || []).slice(0, limit).map(i => ({
+      title: i.title || '',
+      link: i.link || '#',
+      pubDate: i.pubDate || ''
+    }))
+  } catch {
+    return []
+  }
+}

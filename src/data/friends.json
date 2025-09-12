@@ -1,0 +1,28 @@
+[
+    {
+      "name": "LoveApple",
+      "site": "https://loveapple.icu/",
+      "avatar": "/friends/loveapple.jpg",
+      "bio": "一条喜欢苹果的水煮鱼",
+      "tags": ["EE", "C"],
+      "rss": "https://loveapple.icu/atom.xml",
+      "social": {
+        "github": "https://github.com/LoveApple14434"
+      },
+      "since": "2023-09-01",
+      "reciprocal": true
+    },
+    {
+      "name": "Positron",
+      "avatar": "/friends/positron.jpg",
+      "bio": "I'm a student majoring in Intelligent Software and Engineering from Nanjing University, and I'm really interested in new technologies, new concepts and every new things!",
+      "tags": ["C/C++", "Java"],
+      "rss": null,
+      "social": {
+        "github": "https://github.com/Positron114514",
+        "bilibili": "https://space.bilibili.com/490164674?spm_id_from=333.1007.0.0"
+      },
+      "since": "2023-09-01",
+      "reciprocal": false
+    }
+]
