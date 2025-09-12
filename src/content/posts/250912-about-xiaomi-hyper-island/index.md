@@ -2,7 +2,8 @@
 title: '“岛”究竟是怎样的交互？——关于澎湃OS3超级岛的思考'
 published: 2025-08-27
 draft: false
-tags: ['随笔', '玩机', '人机交互']
+series: '随笔'
+tags: ['澎湃OS3', '玩机', '人机交互']
 toc: true
 coverImage:
   src: './cover.jpg'
