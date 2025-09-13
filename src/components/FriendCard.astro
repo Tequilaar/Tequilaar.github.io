@@ -2,8 +2,8 @@
 import IconRss from '~/icons/rss.svg'
 import IconGithub from '~/icons/github.svg'
 import IconBilibili from '~/icons/bilibili.svg'
+import IconXiaohongshu from '~/icons/xiaohongshu.svg'
 import type { SocialLinks } from '~/types'
-import { Image } from 'astro:assets'
 
 interface Friend {
   name: string
@@ -16,6 +16,7 @@ interface Friend {
   since?: string
   reciprocal?: boolean
   note?: string
+  priority?: number
 }
 
 interface Props {
@@ -26,15 +27,16 @@ const { friend } = Astro.props
 ---
 
 <article
-  class="relative group flex h-full flex-col justify-between rounded-2xl border border-accent p-4 hover:bg-accent/5 transition"
+  class="group grid h-full grid-rows-[auto_1fr_auto] rounded-2xl border border-accent p-4 hover:bg-accent/5 transition"
 >
+  <!-- row 1: 头像 + 标题/标签等主体 -->
   <div>
+    <!-- 头像 -->
     {friend.avatar && (
       <div
-        class="not-prose relative w-2/5 rounded-full border-6 border-accent/20 overflow-hidden"
-        style="aspect-ratio: 1 / 1;"
+        class="not-prose relative w-2/5 rounded-full border-[6px] border-accent/20 overflow-hidden"
+        style="aspect-ratio:1/1;"
       >
-        {/* 绝对定位，四边贴紧容器 */}
         <img
           src={friend.avatar}
           alt={friend.name}
@@ -44,7 +46,7 @@ const { friend } = Astro.props
       </div>
     )}
 
-    <div class="flex items-center justify-between gap-3">
+    <div class="flex items-center justify-between gap-3 mt-3">
       <h3 class="text-lg font-semibold">{friend.name}</h3>
       {friend.reciprocal && (
         <span class="text-xs rounded-full border border-[var(--ec-border)] px-2 py-0.5 text-[var(--ec-foreground-muted)]">
@@ -57,26 +59,31 @@ const { friend } = Astro.props
       <p class="mt-1 text-[var(--ec-foreground-muted)]">{friend.bio}</p>
     )}
 
-    {friend.tags && friend.tags.length > 0 && (
-      <div class="mt-2 flex flex-wrap gap-1.5 text-xs text-[var(--ec-foreground-muted)]">
-        {friend.tags.map((t) => (
-          <span class="px-2 py-0.5 rounded-full border border-[var(--ec-border)]">{t}</span>
-        ))}
-      </div>
-    )}
+    <div class="mt-2 flex flex-wrap gap-1.5 text-xs text-[var(--ec-foreground-muted)]">
+      {friend.note && (
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-accent/80 bg-accent/20">
+          <span class="inline-block size-1.5 rounded-full bg-accent"></span>
+          {friend.note}
+        </span>
+      )}
+      {friend.tags?.map(t => (
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full border border-[var(--ec-border)]">{t}</span>
+      ))}
+    </div>
   </div>
 
-  <div class="mt-3 flex items-center gap-2">
-    <!-- 官网 -->
+  <!-- row 2: 占位伸展（什么都不放，让这一行吃掉多余空间） -->
+  <div></div>
+
+  <!-- row 3: 底部按钮 —— 永远处在最后一行，天然贴到底部内边距 -->
+  <div class="pt-3 flex items-center gap-2">
     {friend.site && (
       <a href={friend.site} target="_blank" rel="noopener"
-       class="inline-flex items-center gap-1 rounded-xl border border-[var(--ec-border)] px-2.5 py-1.5 text-sm
-              hover:bg-accent/10 text-accent transition">
+         class="inline-flex items-center gap-1 rounded-xl border border-[var(--ec-border)] px-2.5 py-1.5 text-sm
+                hover:bg-accent/10 text-accent transition">
         访问
       </a>
     )}
-
-    <!-- RSS -->
     {friend.rss && (
       <a href={friend.rss} target="_blank" rel="noopener"
          class="social-link inline-flex items-center gap-1 rounded-xl border border-[var(--ec-border)] px-2.5 py-1.5
@@ -85,8 +92,6 @@ const { friend } = Astro.props
         <span class="text-sm">RSS</span>
       </a>
     )}
-
-    <!-- 社交 -->
     <div class="ml-auto flex items-center gap-2">
       {friend.social?.github && (
         <a href={friend.social.github} target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
@@ -96,6 +101,11 @@ const { friend } = Astro.props
       {friend.social?.bilibili && (
         <a href={friend.social.bilibili} target="_blank" rel="noopener" class="social-link" aria-label="Bilibili">
           <IconBilibili class="size-6" />
+        </a>
+      )}
+      {friend.social?.xiaohongshu && (
+        <a href={friend.social.xiaohongshu} target="_blank" rel="noopener" class="social-link" aria-label="Xiaohongshu">
+          <IconXiaohongshu class="size-6" />
         </a>
       )}
     </div>

@@ -5,8 +5,12 @@ import FriendCard from '~/components/FriendCard.astro'
 import friends from '~/data/friends.json'
 import { fetchLatest } from '~/utils'
 
-// 排序：互链优先、然后按名字
 const sorted = (friends as any[]).slice().sort((a, b) => {
+  const pa = a.priority ?? 0
+  const pb = b.priority ?? 0
+
+  if (pa !== pb) return pb - pa
+
   if ((b.reciprocal ? 1 : 0) !== (a.reciprocal ? 1 : 0)) {
     return (b.reciprocal ? 1 : 0) - (a.reciprocal ? 1 : 0)
   }
@@ -29,7 +33,7 @@ const enriched = await Promise.all(
       支持展示 RSS。
     </p>
 
-    <div class="grid gap-4 sm:grid-cols-2 mt-4">
+    <div class="grid gap-4 sm:grid-cols-2 mt-4 auto-rows-fr items-stretch">
       {enriched.map((f) => <FriendCard friend={f} />)}
     </div>
   </section>

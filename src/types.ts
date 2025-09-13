@@ -156,6 +156,7 @@ export type SocialLinks = {
   netease?: string
   soundcloud?: string
   coolapk?: string
+  xiaohongshu?: string
   email?: string
   rss?: boolean
 }
