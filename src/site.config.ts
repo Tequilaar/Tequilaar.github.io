@@ -37,14 +37,6 @@ const config: SiteConfig = {
       url: '/about',
     },
     {
-      name: '音乐作品',
-      url: '/music'
-    },
-    {
-      name: '应用开发',
-      url: '/app'
-    },
-    {
       name: '博客',
       url: '/posts',
     },
