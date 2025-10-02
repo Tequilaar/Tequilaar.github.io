@@ -1,47 +1,12 @@
 [
     {
-        "name": "LoveApple",
-        "site": "https://loveapple.icu",
-        "avatar": "https://loveapple.icu/img/machinist.jpg",
-        "bio": "NJU EE 23级本科, 微波/射频/超表面；电脑维修，cooding",
-        "tags": ["EE", "RF", "C/C++"],
-        "rss": "https://loveapple.icu/atom.xml",
-        "social": {
-            "github": "https://github.com/LoveApple14434",
-            "bilibili": "https://space.bilibili.com/190956075"
-        },
-        "since": "2025-08-08",
-        "reciprocal": true,
-        "note": "Friend",
-        "priority": 99
+        
     },
     {
-        "name": "Haomin Chen",
-        "site": "https://xiaochennng.top",
-        "avatar": "/friends/haomin.jpg",
-        "bio": "LZRE CS，本科；写 Python / 数据处理。",
-        "tags": ["Python", "数据处理"],
-        "rss": "https://alice.dev/feed.xml",
-        "social": {
-          "github": "https://github.com/XiaoChennnng",
-          "bilibili": "https://space.bilibili.com/434075406"
-        },
-        "since": "2023-07-01",
-        "reciprocal": true,
-        "note": "好朋友+战略合作伙伴"
+        
     },
     {
-        "name": "巧巧",
-        "site": "https://www.xiaohongshu.com/user/profile/6490e459000000000f005b9b",
-        "avatar": "/friends/qiao.webp",
-        "bio": "南京大学大三在读|生命科学",
-        "tags": ["生命科学"],
-        "social": {
-            "xiaohongshu": "https://www.xiaohongshu.com/user/profile/6490e459000000000f005b9b"
-        },
-        "note": "站主的女朋友❤️",
-        "reciprocal": false,
-        "priority": 100
+        
     }
 
 ]

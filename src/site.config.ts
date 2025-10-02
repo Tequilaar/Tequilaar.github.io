@@ -4,14 +4,14 @@ const config: SiteConfig = {
   // Absolute URL to the root of your published site, used for generating links and sitemaps.
   site: 'https://tequilaar.github.io',
   // The name of your site, used in the title and for SEO.
-  title: '音唯的个人小站',
+  title: 'Pendel摆子的个人主页',
   // The description of your site, used for SEO and RSS feed.
   description:
-    '音唯的个人小站：记录开发、音乐创作与学习。', 
+    '一些碎碎念', 
   // The author of the site, used in the footer, SEO, and RSS feed.
-  author: 'Aritx音唯',
+  author: 'Pendel摆子',
   // Keywords for SEO, used in the meta tags.
-  tags: ['AritxOnly', 'Aritx音唯', '个人博客', '个人小站', 'NJUCS', '南京大学'],
+  tags: ['健美式力量训练爱好者','慕尼黑工业大学本科在读','*n*j-t','摆子'],
   // Path to the image used for generating social media previews.
   // Needs to be a square JPEG file due to limitations of the social card generator.
   // Try https://squoosh.app/ to easily convert images to JPEG.
@@ -37,11 +37,11 @@ const config: SiteConfig = {
       url: '/about',
     },
     {
-      name: '博客',
+      name: '随笔',
       url: '/posts',
     },
     {
-      name: '友链',
+      name: '朋友列表',
       url: '/friends'
     },
     // {
@@ -133,41 +133,41 @@ const config: SiteConfig = {
     overrides: {
       // Accent color change
       'github-light': {
-        accent: '#e06763',
-        heading1: '#e06763',
-        heading2: '#e06763',
-        heading3: '#e06763',
-        heading4: '#e06763',
-        heading5: '#e06763',
-        heading6: '#e06763',
-        separator: '#e06763',
+        accent: '#dc9edaff',
+        heading1: '#dc9edaff',
+        heading2: '#dc9edaff',
+        heading3: '#dc9edaff',
+        heading4: '#dc9edaff',
+        heading5: '#dc9edaff',
+        heading6: '#dc9edaff',
+        separator: '#dc9edaff',
         link: 'list',
       },
       'github-dark': {
-        accent: '#eb7a77',
-        heading1: '#eb7a77',
-        heading2: '#eb7a77',
-        heading3: '#eb7a77',
-        heading4: '#eb7a77',
-        heading5: '#eb7a77',
-        heading6: '#eb7a77',
-        separator: '#eb7a77',
+        accent: '#b02897ff',
+        heading1: '#b02897ff',
+        heading2: '#b02897ff',
+        heading3: '#b02897ff',
+        heading4: '#b02897ff',
+        heading5: '#b02897ff',
+        heading6: '#b02897ff',
+        separator: '#b02897ff',
         link: 'list',
       },
     },
   },
   // Social links to display in the footer.
   socialLinks: {
-    github: 'https://github.com/AritxOnly',
+    // github: 'https://github.com/AritxOnly',
     // mastodon: 'https://github.com/stelcodes/multiterm-astro',
-    email: 'aritxonly@outlook.com',
+    email: 'yyzmaxde@outlook.com',
     // linkedin: 'https://github.com/stelcodes/multiterm-astro',
     // bluesky: 'https://github.com/stelcodes/multiterm-astro',
     // twitter: 'https://github.com/stelcodes/multiterm-astro',
-    bilibili: 'https://space.bilibili.com/283375530',
-    netease: 'https://music.163.com/#/artist?id=34279798',
-    soundcloud: 'https://soundcloud.com/aritx-zhou',
-    coolapk: 'http://www.coolapk.com/u/1957498',
+    // bilibili: 'https://space.bilibili.com/283375530',
+    // netease: 'https://music.163.com/#/artist?id=34279798',
+    // soundcloud: 'https://soundcloud.com/aritx-zhou',
+    // coolapk: 'http://www.coolapk.com/u/1957498',
     rss: true, // Set to true to include an RSS feed link in the footer
   },
   // Configuration for Giscus comments.
