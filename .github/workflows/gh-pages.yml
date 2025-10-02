@@ -1,24 +1,24 @@
-name: Deploy Astro to GitHub Pages
+name: Deploy Astro to GitHub Pages # 工作流名称
 
 on:
-  workflow_dispatch:
-  push:
+  workflow_dispatch: # 允许手动在 GitHub 网页端“Run workflow”
+  push: # 也在 push 时触发
     branches: [ main, master ]   # 同时兼容 main/master
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: # 赋予该工作流所需的最小权限
+  contents: read # 读取仓库代码
+  pages: write # 写入 GitHub Pages 产物（发布权限）
+  id-token: write  # 用于 OIDC 鉴权给 Pages（deploy-pages 动作需要）
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
+concurrency: # 并发控制
+  group: pages  # 同一组名的运行互斥（避免并发发布冲突）
+  cancel-in-progress: true  # 如有新的运行，会取消还在进行中的老运行
 
-env:
+env:  # 全局环境变量
   # 如是 monorepo，把这里改成子目录，例如 apps/site
-  WORKDIR: .
+  WORKDIR: .  # 代码所在路径。monorepo 时可改为子目录（例：apps/site）
 
-jobs:
+jobs: # 定义一系列 Job
   build:
     runs-on: ubuntu-latest
     steps:
