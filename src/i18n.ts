@@ -16,11 +16,14 @@ export function langPaths() {
   }))
 }
 
-/** Prefix a site path with the language segment, e.g. ('/projects/x', 'en') -> '/en/projects/x'. */
+/**
+ * Prefix a site path with the language segment and end it with a slash,
+ * e.g. ('/projects/x', 'en') -> '/en/projects/x/'. GitHub Pages redirects slash-less directory URLs.
+ */
 export function localize(path: string, lang: Lang) {
-  const clean = path.startsWith('/') ? path : `/${path}`
-  if (lang === defaultLang) return clean
-  return clean === '/' ? `/${lang}/` : `/${lang}${clean}`
+  let clean = path.startsWith('/') ? path : `/${path}`
+  if (!clean.endsWith('/')) clean += '/'
+  return lang === defaultLang ? clean : `/${lang}${clean}`
 }
 
 /** Strip the language prefix from a pathname so it can be re-localized. */

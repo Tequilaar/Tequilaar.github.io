@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
   site: 'https://tequilaar.github.io',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   i18n: {
     locales: ['zh', 'en', 'de'],
     defaultLocale: 'zh',
