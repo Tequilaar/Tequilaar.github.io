@@ -47,7 +47,15 @@ const contacts = [
         facts.map((f) => (
           <div class:list={['tile', 'fact', { wide: f.wide, accent: f.accent }]}>
             <p class="label">{f.label[lang]}</p>
-            <p class="value">{f.value[lang]}</p>
+            {Array.isArray(f.value) ? (
+              <ul class="value list">
+                {f.value.map((v) => (
+                  <li>{v[lang]}</li>
+                ))}
+              </ul>
+            ) : (
+              <p class="value">{f.value[lang]}</p>
+            )}
             {f.note && <p class="note">{f.note[lang]}</p>}
           </div>
         ))
@@ -161,6 +169,28 @@ const contacts = [
     font-size: 1.12rem;
     font-weight: 650;
     line-height: 1.4;
+  }
+
+  .fact .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fact .list li {
+    position: relative;
+    padding-left: 1em;
+  }
+
+  .fact .list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
   }
 
   .fact .note {
