@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import { localize, ui, type Lang } from '~/i18n'
+
+interface Props {
+  project: CollectionEntry<'projects'> & { slug: string }
+  lang: Lang
+}
+
+const { project, lang } = Astro.props
+const { title, summary, role, tags, cover, stats, size } = project.data
+const href = localize(`/projects/${project.slug}`, lang)
+---
+
+<a class:list={['tile', 'card', size]} href={href}>
+  {
+    cover && (
+      <div class="cover">
+        <Image src={cover} alt="" widths={[240, 480]} sizes="240px" />
+      </div>
+    )
+  }
+  <div class="body">
+    <p class="role">{role}</p>
+    <h3>{title}</h3>
+    <p class="summary">{summary}</p>
+    {
+      stats.length > 0 && (
+        <dl class="stats">
+          {stats.map((s) => (
+            <div>
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+    <ul class="tags">
+      {tags.slice(0, 4).map((tag) => <li class="tag">{tag}</li>)}
+    </ul>
+    <span class="more" aria-hidden="true">{ui[lang].readMore} →</span>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-decoration: none;
+    transition:
+      border-color 0.2s,
+      transform 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .role {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--accent-text);
+    font-weight: 600;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .summary {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.93rem;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 4px 0 0;
+  }
+
+  .stats div {
+    background: var(--surface-2);
+    border-radius: 12px;
+    padding: 10px;
+  }
+
+  .stats dt {
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  .stats dd {
+    margin: 2px 0 0;
+    font-weight: 700;
+    font-size: 1.05rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .more {
+    margin-top: auto;
+    padding-top: 4px;
+    font-size: 0.85rem;
+    color: var(--accent-text);
+    font-weight: 600;
+  }
+
+  .cover {
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 50% 60%, var(--accent-soft), var(--surface-2) 70%);
+    border-radius: 14px;
+    padding: 20px;
+  }
+
+  .cover :global(img) {
+    width: 140px;
+  }
+
+  @media (min-width: 900px) {
+    .wide {
+      grid-column: span 3;
+    }
+    .tall {
+      grid-row: span 2;
+    }
+    .tall .cover {
+      flex: 1;
+    }
+    .normal {
+      grid-column: span 3;
+    }
+  }
+</style>

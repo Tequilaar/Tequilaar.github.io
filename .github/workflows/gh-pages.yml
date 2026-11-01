@@ -1,0 +1,66 @@
+name: Deploy Astro to GitHub Pages # 工作流名称
+
+on:
+  workflow_dispatch: # 允许手动在 GitHub 网页端“Run workflow”
+  push: # 也在 push 时触发
+    branches: [ main, master ]   # 同时兼容 main/master
+
+permissions: # 赋予该工作流所需的最小权限
+  contents: read # 读取仓库代码
+  pages: write # 写入 GitHub Pages 产物（发布权限）
+  id-token: write  # 用于 OIDC 鉴权给 Pages（deploy-pages 动作需要）
+
+concurrency: # 并发控制
+  group: pages  # 同一组名的运行互斥（避免并发发布冲突）
+  cancel-in-progress: true  # 如有新的运行，会取消还在进行中的老运行
+
+env:  # 全局环境变量
+  # 如是 monorepo，把这里改成子目录，例如 apps/site
+  WORKDIR: .  # 代码所在路径。monorepo 时可改为子目录（例：apps/site）
+
+jobs: # 定义一系列 Job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: ${{ env.WORKDIR }}/package-lock.json
+
+      - name: Install deps
+        working-directory: ${{ env.WORKDIR }}
+        run: npm ci
+
+      - name: Build
+        working-directory: ${{ env.WORKDIR }}
+        run: npm run build   # Astro 默认输出 dist/；如你改过输出目录，这里一起改
+
+      # 可选 CNAME：仅当设置了仓库级变量 PAGES_CNAME 时才写入
+      - name: Write CNAME (optional)
+        if: ${{ vars.PAGES_CNAME != '' }}
+        run: |
+          echo "${{ vars.PAGES_CNAME }}" > ${{ env.WORKDIR }}/dist/CNAME
+          echo "CNAME = ${{ vars.PAGES_CNAME }}"
+
+      - name: Sanity check output (non-fatal)
+        run: |
+          ls -la ${{ env.WORKDIR }}/dist | sed -n '1,200p'
+          # 不再强制退出；仅提示
+          test -f ${{ env.WORKDIR }}/dist/CNAME && echo "CNAME present" || echo "CNAME not present (ok)"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.WORKDIR }}/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

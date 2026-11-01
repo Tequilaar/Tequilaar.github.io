@@ -1,0 +1,202 @@
+---
+import { Image } from 'astro:assets'
+import Base from '~/layouts/Base.astro'
+import ProjectCard from '~/components/ProjectCard.astro'
+import avatar from '~/assets/avatar.jpg'
+import { bio, facts, links } from '~/data/profile'
+import { langPaths, ui, type Lang } from '~/i18n'
+import { getProjects } from '~/projects'
+
+export const getStaticPaths = langPaths
+
+const { lang } = Astro.props as { lang: Lang }
+const t = ui[lang]
+const projects = await getProjects(lang)
+
+const contacts = [
+  { key: 'github', label: 'GitHub', href: links.github },
+  { key: 'email', label: 'Email', href: links.email && `mailto:${links.email}` },
+  { key: 'linkedin', label: 'LinkedIn', href: links.linkedin },
+  { key: 'xiaohongshu', label: lang === 'zh' ? '小红书' : 'Xiaohongshu', href: links.xiaohongshu },
+  { key: 'bilibili', label: 'Bilibili', href: links.bilibili },
+].filter((c) => c.href)
+---
+
+<Base lang={lang}>
+  <section class="hero container">
+    <Image class="avatar" src={avatar} alt="" width={96} height={96} densities={[1, 2]} loading="eager" />
+    <h1>{t.hello}</h1>
+    <p class="lead">{bio[lang]}</p>
+    <ul class="hero-links">
+      {
+        contacts.slice(0, 3).map((c) => (
+          <li>
+            <a href={c.href} rel="noopener" target={c.key === 'email' ? undefined : '_blank'}>
+              {c.label} ↗
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="about" class="container block">
+    <h2 class="section-title">{t.about}</h2>
+    <div class="bento">
+      {
+        facts.map((f) => (
+          <div class:list={['tile', 'fact', { wide: f.wide, accent: f.accent }]}>
+            <p class="label">{f.label[lang]}</p>
+            <p class="value">{f.value[lang]}</p>
+            {f.note && <p class="note">{f.note[lang]}</p>}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="projects" class="container block">
+    <h2 class="section-title">{t.projects}</h2>
+    <div class="bento projects">
+      {projects.map((p) => <ProjectCard project={p} lang={lang} />)}
+    </div>
+  </section>
+
+  <section id="contact" class="container block">
+    <h2 class="section-title">{t.contact}</h2>
+    <div class="tile contact">
+      <p>{t.contactNote}</p>
+      <ul>
+        {
+          contacts.map((c) => (
+            <li>
+              <a href={c.href} rel="noopener" target={c.key === 'email' ? undefined : '_blank'}>
+                {c.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-top: 72px;
+    padding-bottom: 24px;
+  }
+
+  .hero :global(.avatar) {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 750;
+  }
+
+  .lead {
+    margin: 20px 0 0;
+    max-width: 36em;
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    color: var(--muted);
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-links a {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .hero-links a:hover {
+    border-color: var(--accent);
+  }
+
+  .block {
+    margin-top: 64px;
+  }
+
+  /* Let the tall card back-fill the column next to the wide one. */
+  .projects {
+    grid-auto-flow: dense;
+  }
+
+  .fact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .fact p {
+    margin: 0;
+  }
+
+  .fact .label {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .fact .value {
+    font-size: 1.12rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .fact .note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: auto;
+    padding-top: 8px;
+  }
+
+  .fact.accent {
+    background: var(--accent-soft);
+    border-color: transparent;
+  }
+
+  .fact.accent .label,
+  .fact.accent .note {
+    color: var(--accent-text);
+  }
+
+  .contact p {
+    margin: 0 0 16px;
+    font-size: 1.05rem;
+  }
+
+  .contact ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact a {
+    color: var(--accent-text);
+    font-weight: 600;
+    text-underline-offset: 3px;
+  }
+</style>
