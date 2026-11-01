@@ -1,7 +1,4 @@
-.DS_STORE
-
-*/.DS_STORE
+.DS_Store
 node_modules
 .astro
 dist
-showing-off-blog-features

@@ -1,0 +1,233 @@
+---
+import '~/styles/global.css'
+import { getImage } from 'astro:assets'
+import avatar from '~/assets/avatar.jpg'
+import { langMeta, locales, localize, ui, unlocalize, type Lang } from '~/i18n'
+
+interface Props {
+  lang: Lang
+  title?: string
+  description?: string
+}
+
+const { lang, title, description } = Astro.props
+const t = ui[lang]
+const pageTitle = title ? `${title} · ${t.siteTitle}` : t.siteTitle
+const pageDescription = description ?? t.description
+const basePath = unlocalize(Astro.url.pathname)
+const ogImage = await getImage({ src: avatar, width: 512, height: 512, format: 'jpeg' })
+const home = localize('/', lang)
+---
+
+<!doctype html>
+<html lang={langMeta[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {
+      locales.map((l) => (
+        <link rel="alternate" hreflang={langMeta[l].htmlLang} href={new URL(localize(basePath, l), Astro.site)} />
+      ))
+    }
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL(ogImage.src, Astro.site)} />
+    <meta name="theme-color" content="#faf9f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)" />
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem('theme')
+        if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container bar">
+        <a class="brand" href={home}>Pendel</a>
+        <nav aria-label="Main">
+          <a href={`${home}#about`}>{t.nav.about}</a>
+          <a href={`${home}#projects`}>{t.nav.projects}</a>
+          <a href={`${home}#contact`}>{t.nav.contact}</a>
+        </nav>
+        <div class="tools">
+          <div class="langs" role="group" aria-label="Language">
+            {
+              locales.map((l) => (
+                <a
+                  href={localize(basePath, l)}
+                  hreflang={langMeta[l].htmlLang}
+                  lang={langMeta[l].htmlLang}
+                  aria-current={l === lang ? 'true' : undefined}
+                >
+                  {langMeta[l].label}
+                </a>
+              ))
+            }
+          </div>
+          <button class="theme" type="button" aria-label={t.toggleTheme} title={t.toggleTheme} data-theme-toggle>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" class="sun">
+              <circle cx="12" cy="12" r="4.5" fill="currentColor"></circle>
+              <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                ></path>
+              </g>
+            </svg>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" class="moon">
+              <path fill="currentColor" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© {new Date().getFullYear()} Pendel · {t.footer}</p>
+      </div>
+    </footer>
+
+    <script>
+      const root = document.documentElement
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const current =
+          root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        const next = current === 'dark' ? 'light' : 'dark'
+        root.dataset.theme = next
+        try {
+          localStorage.setItem('theme', next)
+        } catch {}
+      })
+    </script>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 60px;
+  }
+
+  .brand {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  nav {
+    display: none;
+    gap: 20px;
+    margin-left: 12px;
+  }
+
+  nav a {
+    font-size: 0.92rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--text);
+  }
+
+  @media (min-width: 640px) {
+    nav {
+      display: flex;
+    }
+  }
+
+  .tools {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .langs {
+    display: flex;
+    background: var(--surface-2);
+    border-radius: 999px;
+    padding: 3px;
+  }
+
+  .langs a {
+    font-size: 0.78rem;
+    line-height: 1;
+    padding: 7px 10px;
+    border-radius: 999px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .langs a[aria-current='true'] {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+  }
+
+  .theme {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .theme .moon {
+    display: none;
+  }
+
+  :global(:root[data-theme='dark']) .theme .sun {
+    display: none;
+  }
+
+  :global(:root[data-theme='dark']) .theme .moon {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .theme .sun {
+      display: none;
+    }
+    :global(:root:not([data-theme='light'])) .theme .moon {
+      display: block;
+    }
+  }
+
+  .site-footer {
+    margin-top: 96px;
+    padding: 32px 0 48px;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+</style>
