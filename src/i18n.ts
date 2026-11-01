@@ -34,10 +34,10 @@ export function unlocalize(pathname: string) {
 
 export const ui = {
   zh: {
-    siteTitle: 'Pendel 摆子',
-    description: '慕尼黑工业大学电子与信息工程本科生 Pendel 的个人主页：项目、学业与训练。',
+    siteTitle: 'Yuzhe Yan',
+    description: '慕尼黑工业大学电子与信息工程本科生 Yuzhe Yan 的个人主页：项目、学业与训练。',
     nav: { about: '关于', projects: '项目', contact: '联系' },
-    hello: '你好，我是 Pendel。',
+    hello: '你好，我是 Yuzhe Yan。',
     about: '关于我',
     projects: '项目',
     contact: '找到我',
@@ -52,10 +52,10 @@ export const ui = {
     footer: '用 Astro 构建，部署在 GitHub Pages。',
   },
   en: {
-    siteTitle: 'Pendel',
-    description: 'Personal site of Pendel, an Electrical Engineering student at TUM: projects, studies and training.',
+    siteTitle: 'Yuzhe Yan',
+    description: 'Personal site of Yuzhe Yan, an Electrical Engineering student at TUM: projects, studies and training.',
     nav: { about: 'About', projects: 'Projects', contact: 'Contact' },
-    hello: 'Hi, I’m Pendel.',
+    hello: 'Hi, I’m Yuzhe Yan.',
     about: 'About',
     projects: 'Projects',
     contact: 'Find me',
@@ -70,10 +70,10 @@ export const ui = {
     footer: 'Built with Astro, hosted on GitHub Pages.',
   },
   de: {
-    siteTitle: 'Pendel',
-    description: 'Persönliche Seite von Pendel: Elektrotechnik-Studium an der TUM, Projekte und Training.',
+    siteTitle: 'Yuzhe Yan',
+    description: 'Persönliche Seite von Yuzhe Yan: Elektrotechnik-Studium an der TUM, Projekte und Training.',
     nav: { about: 'Über mich', projects: 'Projekte', contact: 'Kontakt' },
-    hello: 'Hallo, ich bin Pendel.',
+    hello: 'Hallo, ich bin Yuzhe Yan.',
     about: 'Über mich',
     projects: 'Projekte',
     contact: 'Kontakt',
