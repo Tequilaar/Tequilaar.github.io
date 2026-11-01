@@ -1,0 +1,181 @@
+---
+import { Image } from 'astro:assets'
+import { render } from 'astro:content'
+import Base from '~/layouts/Base.astro'
+import { localize, locales, ui, type Lang } from '~/i18n'
+import { getProjects } from '~/projects'
+
+export async function getStaticPaths() {
+  const paths = []
+  for (const lang of locales) {
+    for (const project of await getProjects(lang)) {
+      paths.push({
+        params: { lang: lang === 'zh' ? undefined : lang, slug: project.slug },
+        props: { lang, project },
+      })
+    }
+  }
+  return paths
+}
+
+const { lang, project } = Astro.props as {
+  lang: Lang
+  project: Awaited<ReturnType<typeof getProjects>>[number]
+}
+const t = ui[lang]
+const { title, summary, role, period, tags, cover, stats, links } = project.data
+const { Content } = await render(project)
+---
+
+<Base lang={lang} title={title} description={summary}>
+  <article class="container">
+    <a class="back" href={`${localize('/', lang)}#projects`}>← {t.backHome}</a>
+
+    <header class="head">
+      {cover && <Image class="cover" src={cover} alt="" widths={[200, 400]} sizes="200px" />}
+      <h1>{title}</h1>
+      <p class="summary">{summary}</p>
+      <dl class="meta">
+        <div><dt>{t.role}</dt><dd>{role}</dd></div>
+        <div><dt>{t.period}</dt><dd>{period}</dd></div>
+      </dl>
+      <ul class="tags">{tags.map((tag) => <li class="tag">{tag}</li>)}</ul>
+    </header>
+
+    {
+      stats.length > 0 && (
+        <dl class="stats">
+          {stats.map((s) => (
+            <div class="tile">
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      links.length > 0 && (
+        <section class="links">
+          <h2 class="section-title">{t.links}</h2>
+          <ul>
+            {links.map((l) => (
+              <li>
+                <a href={l.url} target="_blank" rel="noopener">
+                  {l.label} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</Base>
+
+<style>
+  article {
+    padding-top: 40px;
+  }
+
+  .back {
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .back:hover {
+    color: var(--text);
+  }
+
+  .head {
+    margin-top: 32px;
+  }
+
+  .head :global(.cover) {
+    width: 120px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.9rem, 5vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .summary {
+    margin: 16px 0 0;
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 40em;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 32px;
+    margin: 24px 0 16px;
+  }
+
+  .meta dt {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .meta dd {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 32px 0 0;
+  }
+
+  .stats dt {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .stats dd {
+    margin: 4px 0 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .links {
+    margin-top: 48px;
+  }
+
+  .links ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .links a {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .links a:hover {
+    border-color: var(--accent);
+  }
+</style>
