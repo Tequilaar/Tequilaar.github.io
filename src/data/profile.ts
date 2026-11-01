@@ -15,9 +15,9 @@ export const links = {
 }
 
 export const bio: L = {
-  zh: '在慕尼黑工业大学读电子与信息工程本科。喜欢把小工具做得顺手、好看，也喜欢在健身房里推大重量。',
-  en: 'I study Electrical Engineering and Information Technology at TUM. I like building small tools that feel just right — and lifting heavy things.',
-  de: 'Ich studiere Elektrotechnik und Informationstechnik an der TUM. Ich baue gern kleine Tools, die sich genau richtig anfühlen – und hebe gern schwere Gewichte.',
+  zh: '在慕尼黑工业大学读电子与信息工程本科。喜欢把小工具做得顺手、好看，也喜欢力量式健美训练。',
+  en: 'I study Electrical Engineering and Information Technology at TUM. I like building small tools that feel just right — and strength-focused bodybuilding.',
+  de: 'Ich studiere Elektrotechnik und Informationstechnik an der TUM. Ich baue gern kleine Tools, die sich genau richtig anfühlen – und mag kraftorientiertes Bodybuilding.',
 }
 
 /** Tiles in the "About" bento grid. `wide` spans two columns; an array `value` renders one item per line. */
@@ -40,9 +40,9 @@ export const facts: { label: L; value: L | L[]; note?: L; wide?: boolean; accent
   {
     label: { zh: '训练', en: 'Lifting', de: 'Training' },
     value: {
-      zh: '健美式力量训练',
-      en: 'Bodybuilding-style strength training',
-      de: 'Kraftsport im Bodybuilding-Stil',
+      zh: '力量式健美训练',
+      en: 'Strength-focused bodybuilding',
+      de: 'Kraftorientiertes Bodybuilding',
     },
     note: {
       zh: '2023.12 起 · 卧推最佳 117.5 kg',
