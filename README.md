@@ -1,6 +1,6 @@
 # Tequilaar.github.io
 
-Pendel 的个人主页，用 Astro 构建，push 到 `main` 后由 GitHub Actions 部署到 GitHub Pages。
+Yuzhe Yan 的个人主页，用 Astro 构建，push 到 `main` 后由 GitHub Actions 部署到 GitHub Pages。
 
 ## 本地开发
 
